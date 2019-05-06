@@ -1,11 +1,11 @@
 
-TODO:
-
-* add eval functionality -> $.root[(@.key_holder)], $.root[($.array.length())]
+* add eval functionality -> $.root[(@.key_holder)], $.root[($.array.length())] or $.root[]
 
 * add filter functionality -> $.root[?(@.price > 1)]
 
 * add function -> $.root.length() (I don't really like this syntax)
+
+* fix todos
 
 * add more documentation
 
