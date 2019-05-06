@@ -1,0 +1,18 @@
+
+TODO:
+
+* add eval functionality -> $.root[(@.key_holder)], $.root[($.array.length())]
+
+* add filter functionality -> $.root[?(@.price > 1)]
+
+* add function -> $.root.length() (I don't really like this syntax)
+
+* add more documentation
+
+* add test cases
+
+* clean up classes (make everything package local, export JsonPath class only)
+
+* Pull test cases from some online source
+
+* Add a comment due to the inconsistency of all json path parsers
