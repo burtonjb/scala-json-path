@@ -23,20 +23,9 @@ JsonPath expression support both the dot notation and the bracket notation for a
 |..|Deep scan. Get ALL decendants of the object/array|
 |*|Wildcard. Get all children of the object/array| 
 
-### How to use (Theory)
-(TODO)
-
-
-### How to use (my implementation, eventually)
+### How to use
 val jsonPath = new JsonPath(jsonPath: String)
 jsonPath(JSONObject)/jsonPath(JSONArray)/jsonPath(jsonObject: String) -> returns jsonPath traversal of input json object
-
-jsonPath.getPath -> returns the whole json path expression as a string
-(TODO) jsonPath.get??? -> returns the path expressions (as List[String])
-jsonPath.getFilters -> returns the filter expressions (as List[String])
-
-
-
 
 ## How it works
 The initial implementation (and the current implementation) just supports walking the object

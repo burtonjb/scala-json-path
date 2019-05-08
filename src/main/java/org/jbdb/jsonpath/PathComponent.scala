@@ -5,14 +5,15 @@ import org.json.{JSONArray, JSONObject}
 import scala.collection.JavaConverters._
 import scala.collection.mutable.ListBuffer
 
+//TODO: add hashCode for all impls here. Otherwise they'll break in collections
 trait PathComponent {
-  def walk(obj: Any): Any = { //TODO: check if this should be refactored into apply?
+  def apply(obj: Any): Any = {
     obj match {
       case o: JSONObject => walkObject(o)
       case o: JSONArray => walkArray(o)
       case o: Number => walkNumber(o)
       case o: String => walkString(o)
-      case o: List[Any] => Utils.flatten(o.map(a => walk(a)).filter(a => a != Nil && a != None && a != null))
+      case o: List[Any] => Utils.flatten(o.map(a => apply(a)).filter(a => a != Nil && a != None && a != null))
       case _ => Nil
     }
   }
@@ -97,7 +98,7 @@ class JsonArraySlicePath(startIndex: Int, endIndex: Int, step: Int) extends Path
   val _step: Int = step
 
   override def walkArray(jsonArray: JSONArray): Any = {
-    val range = startIndex to endIndex by step
+    val range = startIndex until endIndex by step
     val out = range.map(i => jsonArray.get(i)).filter(a => Utils.notNull(a)).toList
     if (out.isEmpty) None
     out
@@ -148,7 +149,7 @@ class WildCardPath() extends PathComponent {
 
 class DeepSearchPath() extends WildCardPath {
 
-  override def walk(obj: Any): Any = {
+  override def apply(obj: Any): Any = {
     //Basically DFS through all the objects
     val stack = ListBuffer[Any]()
     val outList = ListBuffer[Any]()
@@ -156,7 +157,7 @@ class DeepSearchPath() extends WildCardPath {
     outList.append(obj)
     while (stack.nonEmpty) {
       val obj = stack.remove(0)
-      val o = super.walk(obj)
+      val o = super.apply(obj)
       o match {
         case None =>
         case o: List[Any] =>

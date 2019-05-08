@@ -6,7 +6,7 @@ object JsonPathParser {
 
   private val quoteTokens = List('"', '\'')
 
-  def parsePath(path: String): List[PathComponent] = {
+  def apply(path: String): List[PathComponent] = {
     val isValid = JsonPathParser.validate(path)
     if (!isValid) return List()
     val tokens = JsonPathParser.lex(path)
@@ -154,7 +154,7 @@ object JsonPathParser {
 
   private def convertAtomToPath(atom: Atom): PathComponent = {
     atom.token match {
-      case "$" => new RemoveablePath //FIXME: replace this with a 'root returner' class
+      case "$" => new RemoveablePath //TODO: replace this with a 'root returner' class, if I ever support expressions
       case ".." => new DeepSearchPath
       case i if atom.isNumber => new JsonArrayPath(i.toInt)
       case "*" => new WildCardPath
