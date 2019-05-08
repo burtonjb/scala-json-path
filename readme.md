@@ -69,8 +69,8 @@ I wanted to support multi-matches, array slices and deep search operations.
 The parser was replaced with a Finite State Machine (FSM), though replacing it with a bunch of regexes might have been smarter.
 An image of all the state transitions is included below:  
 ![Image failed to load](./images/lex_state_transition.png "States")  
-` 
-### V0.3 
+
+
 
  
 

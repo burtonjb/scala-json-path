@@ -13,7 +13,7 @@ trait PathComponent {
       case o: JSONArray => walkArray(o)
       case o: Number => walkNumber(o)
       case o: String => walkString(o)
-      case o: List[Any] => Utils.flatten(o.map(a => apply(a)).filter(a => a != Nil && a != None && a != null))
+      case o: List[Any] => walkList(o)
       case _ => Nil
     }
   }
@@ -32,6 +32,10 @@ trait PathComponent {
 
   def walkNumber(number: Number): Any = {
     None
+  }
+
+  def walkList(list: List[Any]): Any = {
+    Utils.flatten(list.map(a => apply(a)).filter(a => a != Nil && a != None && a != null))
   }
 }
 
@@ -100,7 +104,7 @@ class JsonArraySlicePath(startIndex: Int, endIndex: Int, step: Int) extends Path
   override def walkArray(jsonArray: JSONArray): Any = {
     val range = startIndex until endIndex by step
     val out = range.map(i => jsonArray.get(i)).filter(a => Utils.notNull(a)).toList
-    if (out.isEmpty) None
+    if (out.isEmpty) Nil
     out
   }
 
