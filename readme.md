@@ -19,13 +19,15 @@ JsonPath expression support both the dot notation and the bracket notation for a
 |[n]|get the nth element in an array (e.g. $.books[5])|
 |['path1', 'path2']| get the path1 and path2 child elements|
 |[0,5]| get the 0th and 5th elements of the array|
-|[start:end:step]|get a slice of the array|
+|`[start:end:step]`|get a slice of the array|
 |..|Deep scan. Get ALL decendants of the object/array|
 |*|Wildcard. Get all children of the object/array| 
 
 ### How to use
+```text
 val jsonPath = new JsonPath(jsonPath: String)
 jsonPath(JSONObject)/jsonPath(JSONArray)/jsonPath(jsonObject: String) -> returns jsonPath traversal of input json object
+``` 
 
 ## How it works
 The initial implementation (and the current implementation) just supports walking the object
